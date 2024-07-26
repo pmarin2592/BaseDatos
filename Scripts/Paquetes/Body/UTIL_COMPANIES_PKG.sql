@@ -30,13 +30,13 @@ AS
 
         IF V_COMPANY != 0
         THEN
-            --Si existe aplica una excepcion controlada
+            --SI EXISTE APLICA UNA EXCEPCION CONTROLADA
             RAISE V_RAISE_EXISTS;
         ELSE
-            --Busca el consecutivo de compania
+            --BUSCA EL CONSECUTIVO DE COMPANIA
             SELECT COMPANIES_SQ.NEXTVAL INTO V_COMPANYID FROM DUAL;
 
-            --Inserta compania
+            --INSERTA COMPANIA
             INSERT INTO COMPANIES_TB (COMPANYID,
                                       NAMECOMPANY,
                                       ADDRESSCOMPANY,
@@ -46,6 +46,7 @@ AS
                          P_ADDRESSCOMPANY,
                          P_DESCRIPTIONCOMPANY);
 
+P_COMPANYID:= V_COMPANYID;
             COMMIT;
         END IF;
     EXCEPTION
@@ -114,7 +115,7 @@ AS
         WHEN OTHERS
         THEN
             P_ERROR := 'ERROR, ' || SQLERRM;
-            ROLLBACK;
+            
     END;
 END UTIL_COMPANIES_PKG;
 /
