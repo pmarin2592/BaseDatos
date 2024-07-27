@@ -88,6 +88,7 @@ AS
     BEGIN
         DELETE FROM APPLICANTS_TB
               WHERE APPLICANTID = P_ApplicantID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN

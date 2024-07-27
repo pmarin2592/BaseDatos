@@ -2,7 +2,7 @@
 CREATE OR REPLACE PACKAGE BODY JOBHUNTINGDB.UTIL_LANGUAGELEVELS_PKG
 AS
     /******************************************************************************
-         NAME:       UTIL_COMPANIES_PKG
+         NAME:       UTIL_LANGUAGELEVELS_PKG
          PURPOSE: Paquete que contiene los metodos insert,update, delete,select de la tabla
                   LANGUAGELEVELS_TB
 
@@ -61,6 +61,7 @@ AS
     BEGIN
         DELETE FROM LANGUAGELEVELS_TB
               WHERE LEVELID = P_LevelID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN
@@ -74,7 +75,7 @@ AS
     BEGIN
         OPEN P_CURSOR FOR
             SELECT LEVELID, LEVELLANGUAGE, RANKLEVEL
-              FROM JOBHUNTINGDB.LANGUAGELEVELS_TB;
+              FROM LANGUAGELEVELS_TB;
     EXCEPTION
         WHEN OTHERS
         THEN

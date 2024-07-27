@@ -2,9 +2,9 @@
 CREATE OR REPLACE PACKAGE BODY UTIL_JOBPOSITIONS_PKG
 AS
     /******************************************************************************
-           NAME:       UTIL_COMPANIES_PKG
+           NAME:       UTIL_JOBPOSITIONS_PKG
            PURPOSE: Paquete que contiene los metodos insert,update, delete,select de la tabla
-                    REPRESENTATIVES_TB
+                    JOBPOSITIONS_TB
 
            REVISIONS:
            Ver        Date        Author           Description
@@ -104,6 +104,7 @@ AS
     BEGIN
         DELETE FROM JOBPOSITIONS_TB
               WHERE POSITIONID = P_POSITIONID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN

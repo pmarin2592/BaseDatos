@@ -2,7 +2,7 @@
 CREATE OR REPLACE PACKAGE BODY UTIL_EDUCATION_PKG
 AS
     /******************************************************************************
-       NAME:       UTIL_Benefits_PKG
+       NAME:       UTIL_EDUCATION_PKG
        PURPOSE: Paquete que contiene los metodos insert,update, delete,select de la tabla
                 Education_TB
 
@@ -43,7 +43,7 @@ AS
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX
         THEN
-            P_ERROR := 'ERROR, THE BENEFITS ALREADY EXISTS';
+            P_ERROR := 'ERROR, THE EDUCATION ALREADY EXISTS';
             ROLLBACK;
         WHEN OTHERS
         THEN
