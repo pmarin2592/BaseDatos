@@ -1,4 +1,4 @@
-/* Formatted on 7/25/2024 7:37:35 PM (QP5 v5.388) */
+/* Formatted on 7/27/2024 1:41:24 PM (QP5 v5.388) */
 CREATE OR REPLACE PACKAGE BODY UTIL_COMPANIES_PKG
 AS
     /******************************************************************************
@@ -46,7 +46,7 @@ AS
                          P_ADDRESSCOMPANY,
                          P_DESCRIPTIONCOMPANY);
 
-P_COMPANYID:= V_COMPANYID;
+            P_COMPANYID := V_COMPANYID;
             COMMIT;
         END IF;
     EXCEPTION
@@ -93,6 +93,7 @@ P_COMPANYID:= V_COMPANYID;
     BEGIN
         DELETE FROM COMPANIES_TB
               WHERE COMPANYID = P_COMPANYID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN
@@ -115,7 +116,6 @@ P_COMPANYID:= V_COMPANYID;
         WHEN OTHERS
         THEN
             P_ERROR := 'ERROR, ' || SQLERRM;
-            
     END;
 END UTIL_COMPANIES_PKG;
 /

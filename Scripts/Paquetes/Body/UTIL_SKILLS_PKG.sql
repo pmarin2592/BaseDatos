@@ -30,7 +30,7 @@ AS
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX
         THEN
-            P_ERROR := 'ERROR, THE EXPERIENCETYPES ALREADY EXISTS';
+            P_ERROR := 'ERROR, THE SKILLS ALREADY EXISTS';
             ROLLBACK;
         WHEN OTHERS
         THEN
@@ -61,6 +61,7 @@ AS
     BEGIN
         DELETE FROM SKILLS_TB
               WHERE SKILLID = P_SKILLID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN

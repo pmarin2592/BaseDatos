@@ -2,9 +2,9 @@
 CREATE OR REPLACE PACKAGE BODY UTIL_TITLEREQUIREMENTS_PKG
 AS
     /******************************************************************************
-           NAME:       UTIL_COMPANIES_PKG
+           NAME:       UTIL_TITLEREQUIREMENTS_PKG
            PURPOSE: Paquete que contiene los metodos insert,update, delete,select de la tabla
-                    REPRESENTATIVES_TB
+                    TITLEREQUIREMENTS_TB
 
            REVISIONS:
            Ver        Date        Author           Description
@@ -60,6 +60,7 @@ AS
     BEGIN
         DELETE FROM TITLEREQUIREMENTS_TB
               WHERE TITLEID = P_TITLEID AND POSITIONID = P_POSITIONID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN
