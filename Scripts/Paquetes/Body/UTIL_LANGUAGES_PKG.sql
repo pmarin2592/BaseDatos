@@ -2,7 +2,7 @@
 CREATE OR REPLACE PACKAGE BODY UTIL_LANGUAGES_PKG
 AS
     /******************************************************************************
-       NAME:       UTIL_COMPANIES_PKG
+       NAME:       UTIL_LANGUAGES_PKG
        PURPOSE: Paquete que contiene los metodos insert,update, delete,select de la tabla
                 LANGUAGES_TB
 
@@ -58,6 +58,7 @@ AS
     BEGIN
         DELETE FROM LANGUAGES_TB
               WHERE LANGUAGEID = P_LANGUAGEID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN

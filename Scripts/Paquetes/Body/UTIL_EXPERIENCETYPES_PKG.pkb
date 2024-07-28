@@ -1,9 +1,9 @@
 CREATE OR REPLACE PACKAGE BODY JOBHUNTINGDB.UTIL_EXPERIENCETYPES_PKG
 AS
     /******************************************************************************
-           NAME:       UTIL_COMPANIES_PKG
+           NAME:       UTIL_EXPERIENCETYPES_PKG
            PURPOSE: Paquete que contiene los metodos insert,update, delete,select de la tabla
-                    REPRESENTATIVES_TB
+                    EXPERIENCETYPES_TB
 
            REVISIONS:
            Ver        Date        Author           Description

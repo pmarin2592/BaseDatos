@@ -2,7 +2,7 @@
 CREATE OR REPLACE PACKAGE BODY JOBHUNTINGDB.UTIL_TITLES_PKG
 AS
     /******************************************************************************
-      NAME:       UTIL_COMPANIES_PKG
+      NAME:       UTIL_TITLES_PKG
       PURPOSE: Paquete que contiene los metodos insert,update, delete,select de la tabla
                TITLES_TB
 
@@ -58,6 +58,7 @@ AS
     BEGIN
         DELETE FROM TITLES_TB
               WHERE TITLEID = P_TITLEID;
+              COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN
