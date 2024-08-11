@@ -1,4 +1,4 @@
-/* Formatted on 7/25/2024 10:20:23 PM (QP5 v5.388) */
+/* Formatted on 8/11/2024 2:56:37 PM (QP5 v5.388) */
 CREATE OR REPLACE PACKAGE BODY UTIL_JOBPOSITIONS_PKG
 AS
     /******************************************************************************
@@ -104,7 +104,8 @@ AS
     BEGIN
         DELETE FROM JOBPOSITIONS_TB
               WHERE POSITIONID = P_POSITIONID;
-              COMMIT;
+
+        COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN
@@ -128,6 +129,56 @@ AS
         WHEN OTHERS
         THEN
             P_ERROR := 'ERROR, ' || SQLERRM;
+    END;
+
+    PROCEDURE REPORT_JOBPOSITIONS_PR (P_CURSOR   OUT REF_CURSOR,
+                                      P_ERROR    OUT VARCHAR)
+    IS
+    BEGIN
+        OPEN P_CURSOR FOR
+              SELECT J.POSITIONTITLE, COUNT (H.JOBPOSITIONID) COUNT_APPLICANTS
+                FROM HIRINGPROCESS_TB H, JOBPOSITIONS_TB J
+               WHERE H.JOBPOSITIONID = J.POSITIONID
+            GROUP BY J.POSITIONTITLE;
+    EXCEPTION
+        WHEN OTHERS
+        THEN
+            P_ERROR := 'ERROR, ' || SQLERRM;
+    END;
+
+    PROCEDURE UPDATE_MASSIVE_JOBPOSITIONS_PR (P_DATE        DATE,
+                                              P_ERROR   OUT VARCHAR)
+    IS
+        CURSOR c_job_positions (V_DATE DATE)
+        IS
+            SELECT POSITIONID
+              FROM JOBPOSITIONS_TB
+             WHERE ENDDATE <= V_DATE;
+
+        V_RAISE   EXCEPTION;
+    BEGIN
+        IF P_DATE IS NULL
+        THEN
+            RAISE V_RAISE;
+        END IF;
+
+
+        FOR X IN c_job_positions (P_DATE)
+        LOOP
+            UPDATE JOBPOSITIONS_TB J
+               SET J.ACTIVE = 0
+             WHERE J.POSITIONID = X.POSITIONID;
+
+            COMMIT;
+        END LOOP;
+    EXCEPTION
+        WHEN V_RAISE
+        THEN
+            P_ERROR := 'FECHA VIENE VACIA';
+        WHEN OTHERS
+        THEN
+            P_ERROR := 'ERROR, ' || SQLERRM;
+            ROLLBACK;
     END;
 END UTIL_JOBPOSITIONS_PKG;
 /

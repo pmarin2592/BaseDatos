@@ -1,3 +1,4 @@
+/* Formatted on 8/11/2024 1:19:11 PM (QP5 v5.388) */
 CREATE OR REPLACE PACKAGE BODY JOBHUNTINGDB.UTIL_EXPERIENCETYPES_PKG
 AS
     /******************************************************************************
@@ -76,7 +77,21 @@ AS
         WHEN OTHERS
         THEN
             P_ERROR := 'ERROR, ' || SQLERRM;
-            
+    END;
+
+    PROCEDURE REPORT_EXPERIENCETYPES_PR (P_CURSOR   OUT REF_CURSOR,
+                                         P_ERROR    OUT VARCHAR)
+    IS
+    BEGIN
+        OPEN P_CURSOR FOR
+            SELECT E.EXPERIENCETYPE,
+                   GET_COUNT_JOB_FC (J.POSITIONID)     COUNT_APPLICANT
+              FROM JOBPOSITIONS_TB J, EXPERIENCETYPES_TB E
+             WHERE E.TYPEID = J.POSITIONID;
+    EXCEPTION
+        WHEN OTHERS
+        THEN
+            P_ERROR := 'ERROR, ' || SQLERRM;
     END;
 END UTIL_EXPERIENCETYPES_PKG;
 /

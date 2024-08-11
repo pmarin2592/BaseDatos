@@ -1,3 +1,4 @@
+/* Formatted on 8/11/2024 1:17:49 PM (QP5 v5.388) */
 CREATE OR REPLACE PACKAGE JOBHUNTINGDB.UTIL_EXPERIENCETYPES_PKG
 AS
     /******************************************************************************
@@ -12,20 +13,21 @@ AS
     ******************************************************************************/
     TYPE REF_CURSOR IS REF CURSOR;
 
-    PROCEDURE INSERT_EXPERIENCETYPES_PR (
-        P_ExperienceType          IN     VARCHAR2,
-        P_TypeID               OUT NUMBER,
-        P_ERROR                   OUT VARCHAR);
+    PROCEDURE INSERT_EXPERIENCETYPES_PR (P_ExperienceType   IN     VARCHAR2,
+                                         P_TypeID              OUT NUMBER,
+                                         P_ERROR               OUT VARCHAR);
 
-    PROCEDURE UPDATE_EXPERIENCETYPES_PR (
-        P_TypeID            IN     NUMBER,
-        P_ExperienceType          IN     VARCHAR2,
-        P_ERROR                   OUT VARCHAR);
+    PROCEDURE UPDATE_EXPERIENCETYPES_PR (P_TypeID           IN     NUMBER,
+                                         P_ExperienceType   IN     VARCHAR2,
+                                         P_ERROR               OUT VARCHAR);
 
     PROCEDURE DELETE_EXPERIENCETYPES_PR (P_TypeID   IN     NUMBER,
-                                   P_ERROR          OUT VARCHAR );
+                                         P_ERROR       OUT VARCHAR);
 
     PROCEDURE SELECT_EXPERIENCETYPES_PR (P_CURSOR   OUT REF_CURSOR,
-                                   P_ERROR    OUT VARCHAR );
+                                         P_ERROR    OUT VARCHAR);
+
+    PROCEDURE REPORT_EXPERIENCETYPES_PR (P_CURSOR   OUT REF_CURSOR,
+                                         P_ERROR    OUT VARCHAR);
 END UTIL_EXPERIENCETYPES_PKG;
 /
