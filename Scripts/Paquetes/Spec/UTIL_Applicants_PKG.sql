@@ -1,4 +1,4 @@
-/* Formatted on 7/26/2024 4:00:53 PM (QP5 v5.388) */
+/* Formatted on 8/11/2024 2:01:40 AM (QP5 v5.388) */
 CREATE OR REPLACE PACKAGE UTIL_Applicants_PKG
 AS
     /******************************************************************************
@@ -10,6 +10,7 @@ AS
        Ver        Date        Author           Description
        ---------  ----------  ---------------  ------------------------------------
        1.0        7/26/2024      PMARIN       1. Created this package.
+       1.1        08/11/2024     PMARIN       2. Se crea Reporte empleados y sus puestos
     ******************************************************************************/
     TYPE REF_CURSOR IS REF CURSOR;
 
@@ -36,5 +37,12 @@ AS
 
     PROCEDURE SELECT_Applicants_PR (P_CURSOR   OUT REF_CURSOR,
                                     P_ERROR    OUT VARCHAR);
+
+    PROCEDURE REPORT_Applicants_PR (P_CURSOR   OUT REF_CURSOR,
+                                    P_ERROR    OUT VARCHAR);
+
+    PROCEDURE REPORT_Applicants_SALARY_PR (P_SALARY   IN     NUMBER,
+                                           P_CURSOR      OUT REF_CURSOR,
+                                           P_ERROR       OUT VARCHAR);
 END UTIL_Applicants_PKG;
 /

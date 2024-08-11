@@ -1,4 +1,4 @@
-/* Formatted on 7/26/2024 4:08:21 PM (QP5 v5.388) */
+/* Formatted on 8/11/2024 2:02:41 AM (QP5 v5.388) */
 CREATE OR REPLACE PACKAGE BODY UTIL_Applicants_PKG
 AS
     /******************************************************************************
@@ -10,6 +10,7 @@ AS
       Ver        Date        Author           Description
       ---------  ----------  ---------------  ------------------------------------
       1.0        7/26/2024      PMARIN       1. Created this package.
+      1.1        08/11/2024     PMARIN       2. Se crea Reporte empleados y sus puestos
    ******************************************************************************/
 
     PROCEDURE INSERT_Applicants_PR (P_IDNumber            IN     NUMBER,
@@ -88,7 +89,8 @@ AS
     BEGIN
         DELETE FROM APPLICANTS_TB
               WHERE APPLICANTID = P_ApplicantID;
-              COMMIT;
+
+        COMMIT;
     EXCEPTION
         WHEN OTHERS
         THEN
@@ -109,6 +111,41 @@ AS
                    PHONE,
                    YEARSOFEXPERIENCE
               FROM APPLICANTS_TB;
+    EXCEPTION
+        WHEN OTHERS
+        THEN
+            P_ERROR := 'ERROR, ' || SQLERRM;
+    END;
+
+    PROCEDURE REPORT_Applicants_PR (P_CURSOR   OUT REF_CURSOR,
+                                    P_ERROR    OUT VARCHAR)
+    IS
+    BEGIN
+        OPEN P_CURSOR FOR
+            SELECT A.FIRSTNAME || ' ' || A.LASTNAME     NAME,
+                   A.IDNUMBER,
+                   A.EMAIL,
+                   A.YEARSOFEXPERIENCE                  YEARS_OF_EXPERIENCE,
+                   FIND_TITLEJOB_FC (A.APPLICANTID)     TITLE_JOB
+              FROM APPLICANTS_TB A;
+    EXCEPTION
+        WHEN OTHERS
+        THEN
+            P_ERROR := 'ERROR, ' || SQLERRM;
+    END;
+
+    PROCEDURE REPORT_Applicants_SALARY_PR (P_SALARY   IN     NUMBER,
+                                           P_CURSOR      OUT REF_CURSOR,
+                                           P_ERROR       OUT VARCHAR)
+    IS
+    BEGIN
+        OPEN P_CURSOR FOR
+            SELECT A.IDNUMBER,
+                   A.FIRSTNAME || ' ' || A.LASTNAME                        NAME,
+                   GET_SALARY_FC (GET_JOBPOSITIONID_FC (A.APPLICANTID))    SALARY
+              FROM APPLICANTS_TB A
+             WHERE GET_SALARY_FC (GET_JOBPOSITIONID_FC (A.APPLICANTID)) <=
+                   P_SALARY;
     EXCEPTION
         WHEN OTHERS
         THEN
