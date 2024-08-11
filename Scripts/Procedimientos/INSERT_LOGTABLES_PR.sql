@@ -1,5 +1,4 @@
-/* Formatted on 7/27/2024 5:25:06 PM (QP5 v5.388) */
-CREATE OR REPLACE PROCEDURE INSERT_LOGTABLES_PR (P_TABLELOG    IN VARCHAR2,
+CREATE OR REPLACE PROCEDURE JOBHUNTINGDB.INSERT_LOGTABLES_PR (P_TABLELOG    IN VARCHAR2,
                                                  P_DLL         IN VARCHAR2,
                                                  P_BEFORELOG   IN VARCHAR2,
                                                  P_AFTERLOG    IN VARCHAR2,
@@ -43,11 +42,11 @@ BEGIN
                  P_USERLOG,
                  SYSDATE);
 
-    COMMIT;
+   
 EXCEPTION
     WHEN OTHERS
     THEN
-        ROLLBACK;
+        
         RAISE;
 END INSERT_LOGTABLES_PR;
 /

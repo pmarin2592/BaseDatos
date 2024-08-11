@@ -17,7 +17,7 @@ COMMENT ON COLUMN JOBHUNTINGDB.LanguageRequirements_TB.LevelID IS 'Campo que alm
 ALTER TABLE JOBHUNTINGDB.LanguageRequirements_TB ADD (
   CONSTRAINT LanguageRequirements_PK
   PRIMARY KEY
-  (LanguageID)
+  (LanguageID, PositionID, LevelID)
   ENABLE VALIDATE);
 
 

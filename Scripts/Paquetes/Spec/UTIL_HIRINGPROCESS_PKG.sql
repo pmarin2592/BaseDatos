@@ -18,6 +18,7 @@ AS
                                        P_APPLICATIONDATE   IN     DATE,
                                        P_COMPLETIONDATE    IN     DATE,
                                        P_HIRED             IN     NUMBER,
+                                       P_JOBPOSITIONID    IN NUMBER,
                                        P_PROCESSID            OUT NUMBER,
                                        P_ERROR                OUT VARCHAR);
 

@@ -17,6 +17,7 @@ AS
                                        P_APPLICATIONDATE   IN     DATE,
                                        P_COMPLETIONDATE    IN     DATE,
                                        P_HIRED             IN     NUMBER,
+                                       P_JOBPOSITIONID    IN NUMBER,
                                        P_PROCESSID            OUT NUMBER,
                                        P_ERROR                OUT VARCHAR)
     IS
@@ -29,13 +30,15 @@ AS
                                       STATUSID,
                                       APPLICATIONDATE,
                                       COMPLETIONDATE,
-                                      HIRED)
+                                      HIRED,
+                                      JOBPOSITIONID)
              VALUES (V_PROCESSID,
                      P_APPLICANTID,
                      P_STATUSID,
                      P_APPLICATIONDATE,
                      P_COMPLETIONDATE,
-                     P_HIRED);
+                     P_HIRED,
+                     P_JOBPOSITIONID);
 
         P_PROCESSID := V_PROCESSID;
         COMMIT;

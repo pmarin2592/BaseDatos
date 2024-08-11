@@ -17,7 +17,7 @@ COMMENT ON COLUMN JOBHUNTINGDB.ApplicantLanguages_TB.ProficiencyLevel IS 'Campo 
 ALTER TABLE JOBHUNTINGDB.ApplicantLanguages_TB ADD (
   CONSTRAINT ApplicantLanguages_TB_PK
   PRIMARY KEY
-  (LanguageID)
+  (LanguageID,ApplicantID)
   ENABLE VALIDATE
 ,  CONSTRAINT ProficiencyLevel_CK
   CHECK (ProficiencyLevel >= 0)
